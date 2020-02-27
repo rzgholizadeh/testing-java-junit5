@@ -1,8 +1,11 @@
 package guru.springframework.sfgpetclinic.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,5 +38,31 @@ class IndexControllerTest {
                     controller.oopsHandler();
                 }
         );
+    }
+
+    //@Disabled
+    @Test
+    void testTimeOut() {
+        assertTimeout(Duration.ofMillis(100),
+                () -> {
+                    Thread.sleep(5000);
+                    System.out.println("regular timeout");
+                }
+
+        );
+
+    }
+
+    // @Disabled
+    @Test
+    void testTimeOutPreemptively() {
+        assertTimeoutPreemptively(Duration.ofMillis(100),
+                () -> {
+                    Thread.sleep(5000);
+                    System.out.println("preemptive timeout");
+                }
+        );
+
+
     }
 }
